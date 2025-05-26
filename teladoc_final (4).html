@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Care - Teladoc Health</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo img {
+            height: 45px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: #4b3377;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            color: #00a8cc;
+        }
+        
+        /* Hero */
+        .hero {
+            background: linear-gradient(rgba(75,51,119,0.8), rgba(0,168,204,0.8)), 
+                        url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+            color: white;
+            padding: 140px 0 100px;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .hero .description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        .cta-button {
+            background: white;
+            color: #4b3377;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Services */
+        .services {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #4b3377;
+            margin-bottom: 3rem;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1rem;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .service-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .service-card h3 {
+            color: #4b3377;
+            margin-bottom: 1rem;
+        }
+        
+        /* App Section */
+        .app-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .app-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .app-text h2 {
+            font-size: 2.5rem;
+            color: #4b3377;
+            margin-bottom: 1rem;
+        }
+        
+        .app-text .subtitle {
+            color: #00a8cc;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .app-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+        
+        .app-features li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .app-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00a8cc;
+            font-weight: bold;
+        }
+        
+        .phone-mockup {
+            text-align: center;
+        }
+        
+        .phone-container {
+            width: 250px;
+            height: 500px;
+            background: #333;
+            border-radius: 25px;
+            padding: 15px;
+            margin: 0 auto;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #4b3377, #00a8cc);
+            border-radius: 20px;
+            padding: 15px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-header {
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .chat-message {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 12px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+        }
+        
+        /* When to Use */
+        .when-to-use {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+        
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .use-case {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #00a8cc;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        .use-case h4 {
+            color: #4b3377;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Contact */
+        .contact {
+            padding: 60px 0;
+            background: #4b3377;
+            color: white;
+            text-align: center;
+        }
+        
+        .contact-link {
+            color: #00a8cc;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 2px solid #00a8cc;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .contact-link:hover {
+            background: #00a8cc;
+            color: white;
+        }
+        
+        /* PDF Download Button */
+        .pdf-download {
+            background: linear-gradient(135deg, #4b3377, #00a8cc);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(75, 51, 119, 0.3);
+        }
+        
+        .pdf-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(75, 51, 119, 0.4);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            background: #4b3377;
+            color: white;
+            padding: 20px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #4b3377;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: #4b3377;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #3d2a63;
+        }
+        
+        /* Chatbot */
+        .chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .chatbot-toggle {
+            width: 60px;
+            height: 60px;
+            background: #4b3377;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .chatbot-window {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 300px;
+            height: 400px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: none;
+            flex-direction: column;
+        }
+        
+        .chatbot-window.show {
+            display: flex;
+        }
+        
+        .chatbot-header {
+            background: #4b3377;
+            color: white;
+            padding: 15px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f9f9f9;
+        }
+        
+        .chat-msg {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            max-width: 80%;
+            font-size: 0.9rem;
+        }
+        
+        .chat-msg.bot {
+            background: white;
+            align-self: flex-start;
+        }
+        
+        .chat-msg.user {
+            background: #4b3377;
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        
+        .chatbot-input {
+            padding: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+        }
+        
+        .send-btn {
+            background: #4b3377;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2rem; }
+            .app-content { grid-template-columns: 1fr; text-align: center; }
+            .use-cases { grid-template-columns: 1fr; }
+            .chatbot-window { width: 280px; right: -10px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="https://teladochealth.es/" target="_blank">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMjAwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8dGV4dCB4PSIxMCIgeT0iNDAiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjI4IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjNGIzMzc3Ij5UZWxhZG9jPC90ZXh0Pgo8dGV4dCB4PSI2MCIgeT0iNjUiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSIjMDBhOGNjIj5IRUFMVEg8L3RleHQ+CjxjaXJjbGUgY3g9IjE2NSIgY3k9IjMyIiByPSI4IiBmaWxsPSIjMDBhOGNjIi8+Cjwvc3ZnPg==" alt="Teladoc Health">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#services">Servicios</a></li>
+                <li><a href="#app">App</a></li>
+                <li><a href="#when">Cuándo Usar</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Premium Care</h1>
+            <p class="subtitle">Servicio Médico Exclusivo</p>
+            <p class="description">
+                Acceso directo a los mejores especialistas del mundo con total privacidad y confidencialidad. 
+                Su salud merece la atención más exclusiva y personalizada.
+            </p>
+            <a href="#services" class="cta-button">Descubrir Servicios</a>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios Exclusivos</h2>
+            
+            <!-- Botón de descarga del PDF -->
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <a href="#" class="pdf-download" onclick="downloadPDF()">
+                    📄 Descargar Información Completa (PDF)
+                </a>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Doctor">
+                    </div>
+                    <h3>Asesor Médico Personal</h3>
+                    <p>Un médico especialista especialmente asignado estará disponible para resolver cualquier duda de salud que tenga.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img src="https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Tecnología médica">
+                    </div>
+                    <h3>Acceso a Expertos Internacionales</h3>
+                    <p>Le damos acceso directo a los mejores especialistas del mundo, permitiéndole consultar con líderes internacionales.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <img src="https://images.unsplash.com/photo-1584432810601-6c7f27d2362b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1989&q=80" alt="Historial médico">
+                    </div>
+                    <h3>Gestión Integral de Citas</h3>
+                    <p>Nos encargamos de organizar su historia médica y gestionar las visitas con los especialistas más adecuados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="app" class="app-section">
+        <div class="container">
+            <div class="app-content">
+                <div class="app-text">
+                    <h2>Premium Care App</h2>
+                    <p class="subtitle">Atención médica de élite en su móvil</p>
+                    <p>Nuestra aplicación móvil le conecta instantáneamente con especialistas médicos de prestigio internacional. Chat directo, consultas médicas y gestión completa de su salud.</p>
+                    
+                    <ul class="app-features">
+                        <li>Chat directo con su Asesor Médico Personal</li>
+                        <li>Conexión inmediata con expertos internacionales</li>
+                        <li>Gestión de citas y historiales médicos</li>
+                        <li>Consultas médicas disponibles 24/7</li>
+                        <li>Segunda opinión médica al instante</li>
+                        <li>Máxima privacidad y confidencialidad</li>
+                    </ul>
+                </div>
+                
+                <div class="phone-mockup">
+                    <div class="phone-container">
+                        <div class="phone-screen">
+                            <div class="chat-header">
+                                <h4>Dr. García - Cardiólogo</h4>
+                                <p>Especialista Premium Care</p>
+                            </div>
+                            <div class="chat-message">¡Hola! Soy su asesor médico personal.</div>
+                            <div class="chat-message">Tengo dudas sobre mis análisis</div>
+                            <div class="chat-message">He revisado su historial. ¿Qué valores le preocupan?</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="when" class="when-to-use">
+        <div class="container">
+            <h2 class="section-title">¿Cuándo Utilizar Premium Care?</h2>
+            <div class="use-cases">
+                <div class="use-case">
+                    <h4>Acceso a Expertos</h4>
+                    <p>Cuando necesite acceso rápido a un experto de reconocido prestigio internacional.</p>
+                </div>
+                
+                <div class="use-case">
+                    <h4>Segunda Opinión Médica</h4>
+                    <p>Para revisar su diagnóstico con uno de los mejores especialistas a nivel internacional.</p>
+                </div>
+                
+                <div class="use-case">
+                    <h4>Citas Médicas</h4>
+                    <p>Cuando necesite una cita con un médico especializado.</p>
+                </div>
+                
+                <div class="use-case">
+                    <h4>Consultas Durante Viajes</h4>
+                    <p>Si está de viaje y necesita contrastar una duda médica.</p>
+                </div>
+                
+                <div class="use-case">
+                    <h4>Clarificación de Informes</h4>
+                    <p>Cuando reciba un informe médico y tenga dudas que comentar con un médico de confianza.</p>
+                </div>
+                
+                <div class="use-case">
+                    <h4>Enfermedades Raras</h4>
+                    <p>Si un familiar ha recibido diagnóstico de una enfermedad poco frecuente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contacto</h2>
+            <p>¿Necesita más información sobre Premium Care?</p>
+            <div style="margin: 1rem 0;">
+                <p><strong>Teladoc Health</strong></p>
+                <p>Via Augusta 252-260, 08017 Barcelona</p>
+                <p>Todos los servicios bajo estricta confidencialidad médica</p>
+            </div>
+            <a href="#" class="contact-link" onclick="openModal()">📧 Solicitar Información</a>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Solicitar Información</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label>Nombre completo *</label>
+                        <input type="text" name="nombre" required placeholder="Su nombre completo">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Correo electrónico *</label>
+                        <input type="email" name="email" required placeholder="ejemplo@correo.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Motivo de contacto *</label>
+                        <select name="motivo" required>
+                            <option value="">Seleccione un motivo</option>
+                            <option>Información general sobre Premium Care</option>
+                            <option>Consulta sobre Asesor Médico Personal</option>
+                            <option>Acceso a Expertos Internacionales</option>
+                            <option>Gestión de Citas y Historiales</option>
+                            <option>Información sobre la App móvil</option>
+                            <option>Consulta médica</option>
+                            <option>Otro motivo</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Mensaje adicional (opcional)</label>
+                        <textarea name="mensaje" placeholder="Compártanos más detalles..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">📨 Enviar Solicitud</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot -->
+    <div class="chatbot">
+        <button class="chatbot-toggle" onclick="toggleChat()">💬</button>
+        <div class="chatbot-window" id="chatbot">
+            <div class="chatbot-header">
+                <span>Asistente Premium Care</span>
+                <button onclick="toggleChat()" style="background:none;border:none;color:white;cursor:pointer;">&times;</button>
+            </div>
+            <div class="chatbot-messages" id="messages">
+                <div class="chat-msg bot">¡Hola! Soy su asistente virtual de Premium Care. ¿En qué puedo ayudarle?</div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatInput" placeholder="Escriba su pregunta..." onkeypress="handleEnter(event)">
+                <button class="send-btn" onclick="sendMessage()">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal functions
+        function openModal() {
+            document.getElementById('modal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('modal').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+        
+        function submitForm(e) {
+            e.preventDefault();
+            
+            // Obtener datos del formulario
+            const formData = new FormData(e.target);
+            const nombre = formData.get('nombre') || e.target.querySelector('input[type="text"]').value;
+            const email = formData.get('email') || e.target.querySelector('input[type="email"]').value;
+            const motivo = formData.get('motivo') || e.target.querySelector('select').value;
+            const mensaje = formData.get('mensaje') || e.target.querySelector('textarea').value;
+            
+            // Crear el contenido del email
+            const asunto = `[Premium Care] Nueva solicitud de información - ${nombre}`;
+            const cuerpo = `Estimado equipo de Premium Care,
+
+Nueva solicitud de información recibida:
+
+DATOS DEL CONTACTO:
+- Nombre: ${nombre}
+- Email: ${email}
+- Motivo: ${motivo}
+
+MENSAJE:
+${mensaje || 'Sin mensaje adicional'}
+
+---
+Este email fue generado automáticamente desde la página web de Premium Care.
+
+Fecha: ${new Date().toLocaleString('es-ES')}`;
+
+            // Crear enlace mailto
+            const mailtoLink = `mailto:alexmata92@gmail.com?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+            
+            // Abrir cliente de email
+            window.location.href = mailtoLink;
+            
+            // Mostrar confirmación
+            alert('Se abrirá su cliente de email con la información prellenada. Por favor, envíe el email para completar su solicitud.');
+            
+            closeModal();
+            e.target.reset();
+        }
+        
+        // Chatbot functions
+        function toggleChat() {
+            const chatbot = document.getElementById('chatbot');
+            chatbot.classList.toggle('show');
+        }
+        
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            addMessage(message, 'user');
+            input.value = '';
+            
+            setTimeout(() => {
+                const response = getBotResponse(message);
+                addMessage(response, 'bot');
+            }, 1000);
+        }
+        
+        function handleEnter(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+        
+        function addMessage(text, sender) {
+            const messages = document.getElementById('messages');
+            const div = document.createElement('div');
+            div.className = `chat-msg ${sender}`;
+            div.textContent = text;
+            messages.appendChild(div);
+            messages.scrollTop = messages.scrollHeight;
+        }
+        
+        function getBotResponse(message) {
+            const msg = message.toLowerCase();
+            
+            if (msg.includes('servicio') || msg.includes('que hacen')) {
+                return 'Ofrecemos: Asesor Médico Personal, Acceso a Expertos Internacionales y Gestión Integral de Citas.';
+            }
+            
+            if (msg.includes('cuando') || msg.includes('usar')) {
+                return 'Use Premium Care para: acceso a expertos, segunda opinión, citas médicas, consultas en viajes, clarificar informes o enfermedades raras.';
+            }
+            
+            if (msg.includes('contacto') || msg.includes('dirección')) {
+                return 'Estamos en Via Augusta 252-260, 08017 Barcelona. Todos los servicios con total confidencialidad.';
+            }
+            
+            if (msg.includes('app') || msg.includes('móvil')) {
+                return 'Nuestra app le conecta con especialistas 24/7 mediante chat directo, gestión de citas y segunda opinión médica.';
+            }
+            
+            if (msg.includes('precio') || msg.includes('coste')) {
+                return 'Para información sobre precios, contacte directamente con nuestro equipo en Barcelona para una consulta personalizada.';
+            }
+            
+            return 'Puedo ayudarle con información sobre nuestros servicios, cuándo usar Premium Care, contacto o nuestra app móvil. ¿Qué le interesa saber?';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
